@@ -18,8 +18,14 @@ function displayBooks() {
 
     for (let i = 0; i < myLibrary.length; i++) {
         const div = document.createElement("div");
-        div.className = "card";
+        div.className = `card ${[i]}`;
         cards_container.appendChild(div);
+
+        const btn = document.createElement("button");
+        btn.innerHTML = "x";
+
+        const span = document.createElement("span");
+        span.appendChild(btn);
 
         const h1 = document.createElement("h1");
         h1.innerHTML = `${myLibrary[i].title}`;
@@ -33,10 +39,7 @@ function displayBooks() {
         const p2 = document.createElement("p");
         p2.innerHTML = `Read: ${myLibrary[i].read}`;
 
-        div.appendChild(h1);
-        div.appendChild(h2);
-        div.appendChild(p);
-        div.appendChild(p2);
+        div.append(span, h1, h2, p, p2);
     }
 }
 
@@ -48,6 +51,16 @@ function closeForm() {
     form.style.display = "none";
 }
 
+function removeBook(el) {
+    card = el.parentNode.parentNode;
+    card.remove();
+
+    index = card.className.split(" ")[1];
+    myLibrary.splice(index, 1);
+
+    displayBooks();
+}
+
 addBookToLibrary("To Kill a Mockingbird", "Harper Lee", "323", "no");
 addBookToLibrary("The Hunger Games", "Suzanne Collins", "374", "no");
 addBookToLibrary("Animal Farm", "George Orwell", "128", "no");
@@ -55,6 +68,7 @@ displayBooks();
 
 const add_btn = document.querySelector(".add-book-button");
 const form = document.querySelector("#myForm");
+const card_remove_btn = document.querySelector(".card button");
 
 add_btn.addEventListener("click", () => {
     showForm();
@@ -71,4 +85,8 @@ form.addEventListener("submit", (e) => {
     addBookToLibrary(title, author, pages, read);
     displayBooks();
     closeForm();
+});
+
+card_remove_btn.addEventListener("click", () => {
+    removeBook(card_remove_btn);
 });
