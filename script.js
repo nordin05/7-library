@@ -25,13 +25,13 @@ function displayBooks() {
         h1.innerHTML = `${myLibrary[i].title}`;
 
         const h2 = document.createElement("h2");
-        h2.innerHTML = `${myLibrary[i].author}`;
+        h2.innerHTML = `Author: ${myLibrary[i].author}`;
 
         const p = document.createElement("p");
-        p.innerHTML = `${myLibrary[i].pages}`;
+        p.innerHTML = `${myLibrary[i].pages} pages`;
 
         const p2 = document.createElement("p");
-        p2.innerHTML = `${myLibrary[i].read}`;
+        p2.innerHTML = `Read: ${myLibrary[i].read}`;
 
         div.appendChild(h1);
         div.appendChild(h2);
@@ -48,7 +48,9 @@ function closeForm() {
     form.style.display = "none";
 }
 
-// addBookToLibrary();
+addBookToLibrary("To Kill a Mockingbird", "Harper Lee", "323", "no");
+addBookToLibrary("The Hunger Games", "Suzanne Collins", "374", "no");
+addBookToLibrary("Animal Farm", "George Orwell", "128", "no");
 displayBooks();
 
 const add_btn = document.querySelector(".add-book-button");
