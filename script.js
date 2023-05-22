@@ -7,12 +7,7 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-function addBookToLibrary() {
-    let title = prompt("What is the title of the book?");
-    let author = prompt("Who is the author of the book?");
-    let pages = prompt("How many pages does the book have?");
-    let read = prompt("Have you read the book? y/n");
-
+function addBookToLibrary(title, author, pages, read) {
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
 }
@@ -45,5 +40,33 @@ function displayBooks() {
     }
 }
 
-addBookToLibrary();
+function showForm() {
+    form.style.display = "block";
+}
+
+function closeForm() {
+    form.style.display = "none";
+}
+
+// addBookToLibrary();
 displayBooks();
+
+const add_btn = document.querySelector(".add-book-button");
+const form = document.querySelector("#myForm");
+
+add_btn.addEventListener("click", () => {
+    showForm();
+});
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let title = document.querySelector("#title").value;
+    let author = document.querySelector("#author").value;
+    let pages = document.querySelector("#pages").value;
+    let read = document.querySelector("#read").value;
+
+    addBookToLibrary(title, author, pages, read);
+    displayBooks();
+    closeForm();
+});
