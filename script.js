@@ -7,6 +7,10 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
+Book.prototype.toggleRead = function () {
+    this.read = !this.read;
+};
+
 function addBookToLibrary(title, author, pages, read) {
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
@@ -41,8 +45,12 @@ function displayBooks() {
 
         if (myLibrary[i].read == true) {
             read_status.innerHTML = "Read";
+            read_status.style.backgroundColor = "hsl(177.14deg 46.01% 57.7%)";
+            read_status.style.color = "hsl(148.38deg 49.3% 27.84%)";
         } else if (myLibrary[i].read == false) {
             read_status.innerHTML = "Not read";
+            read_status.style.backgroundColor = "hsl(0deg 38.46% 59.22%)";
+            read_status.style.color = "hsl(0deg 47.69% 25.49%)";
         }
 
         div.append(span, h1, h2, p, read_status);
@@ -63,11 +71,17 @@ function removeBook(el) {
 
     index = card.className.split(" ")[1];
     myLibrary.splice(index, 1);
-    console.log(myLibrary);
+
     displayBooks();
 }
 
-function toggleReadStatus() {}
+function toggleReadStatus(el) {
+    card = el.parentNode;
+    index = card.className.split(" ")[1];
+
+    myLibrary[index].toggleRead();
+    displayBooks();
+}
 
 addBookToLibrary("To Kill a Mockingbird", "Harper Lee", "323", false);
 addBookToLibrary("The Hunger Games", "Suzanne Collins", "374", false);
@@ -76,8 +90,6 @@ displayBooks();
 
 const add_btn = document.querySelector(".add-book-button");
 const form = document.querySelector("#myForm");
-const card_remove_btn = [...document.querySelectorAll(".card button")];
-const read_status_btn = document.querySelector(".read-status");
 
 add_btn.addEventListener("click", () => {
     showForm();
@@ -102,24 +114,6 @@ document.addEventListener("click", function (e) {
     if (card_remove_btn) {
         removeBook(card_remove_btn);
     } else if (read_status_btn) {
-        console.log("Change read status");
+        toggleReadStatus(read_status_btn);
     }
 });
-
-// card_remove_btn.forEach(function (item) {
-//     item.addEventListener("click", function () {
-//         removeBook(item);
-//     });
-// });
-
-// card_remove_btn.addEventListener("click", () => {
-//     removeBook(card_remove_btn);
-// });
-
-// read_status_btn.addEventListener("click", () => {
-//     if (read_status_btn.innerHTML == "Read") {
-//         read_status_btn.innerHTML = "Not Read";
-//     } else if (read_status_btn.innerHTML == "Not read") {
-//         read_status_btn.innerHTML = "Read";
-//     }
-// });

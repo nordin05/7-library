@@ -111,8 +111,6 @@ button {
     height: 15%;
     margin: 10px 0px 15px 15px;
     border-radius: 15px;
-    background-color: hsl(177.14deg 46.01% 57.7%);
-    color: hsl(148.38deg 49.3% 27.84%);
 }
 
 .add-book-button {
