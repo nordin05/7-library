@@ -58,11 +58,14 @@ function displayBooks() {
 }
 
 function showForm() {
-    form.style.display = "block";
+    form.style.display = "grid";
+    form.style.position = "fixed";
 }
 
 function closeForm() {
     form.style.display = "none";
+    form.style.position = "static";
+    form.reset();
 }
 
 function removeBook(el) {
@@ -91,8 +94,17 @@ displayBooks();
 const add_btn = document.querySelector(".add-book-button");
 const form = document.querySelector("#myForm");
 
-add_btn.addEventListener("click", () => {
+add_btn.addEventListener("click", (e) => {
     showForm();
+    e.stopPropagation();
+});
+
+form.addEventListener("click", (e) => {
+    e.stopPropagation();
+});
+
+document.body.addEventListener("click", () => {
+    closeForm();
 });
 
 form.addEventListener("submit", (e) => {
