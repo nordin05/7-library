@@ -5,6 +5,10 @@
     --library-bg: hsl(157.85deg 31.67% 81.56%);
 }
 
+body {
+    background-color: black;
+}
+
 body,
 button,
 label {
@@ -212,4 +216,13 @@ label {
     color: hsl(199deg 18.97% 41.03%);
     border: 3px solid hsl(199deg 25.67% 58.69%);
     background-color: hsl(199 37% 69% / 1);
+}
+
+@keyframes darken {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.65;
+    }
 }

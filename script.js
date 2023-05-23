@@ -60,11 +60,13 @@ function displayBooks() {
 function showForm() {
     form.style.display = "grid";
     form.style.position = "fixed";
+    document.querySelector(".container").style.animation = "darken 1s forwards";
 }
 
 function closeForm() {
     form.style.display = "none";
     form.style.position = "static";
+    document.querySelector(".container").style.animation = "";
     form.reset();
 }
 
