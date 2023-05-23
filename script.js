@@ -31,15 +31,21 @@ function displayBooks() {
         h1.innerHTML = `${myLibrary[i].title}`;
 
         const h2 = document.createElement("h2");
-        h2.innerHTML = `Author: ${myLibrary[i].author}`;
+        h2.innerHTML = `${myLibrary[i].author}`;
 
         const p = document.createElement("p");
         p.innerHTML = `${myLibrary[i].pages} pages`;
 
-        const p2 = document.createElement("p");
-        p2.innerHTML = `Read: ${myLibrary[i].read}`;
+        const read_status = document.createElement("div");
+        read_status.className = "read-status";
 
-        div.append(span, h1, h2, p, p2);
+        if (myLibrary[i].read == true) {
+            read_status.innerHTML = "Read";
+        } else if (myLibrary[i].read == false) {
+            read_status.innerHTML = "Not read";
+        }
+
+        div.append(span, h1, h2, p, read_status);
     }
 }
 
@@ -57,18 +63,21 @@ function removeBook(el) {
 
     index = card.className.split(" ")[1];
     myLibrary.splice(index, 1);
-
+    console.log(myLibrary);
     displayBooks();
 }
 
-addBookToLibrary("To Kill a Mockingbird", "Harper Lee", "323", "no");
-addBookToLibrary("The Hunger Games", "Suzanne Collins", "374", "no");
-addBookToLibrary("Animal Farm", "George Orwell", "128", "no");
+function toggleReadStatus() {}
+
+addBookToLibrary("To Kill a Mockingbird", "Harper Lee", "323", false);
+addBookToLibrary("The Hunger Games", "Suzanne Collins", "374", false);
+addBookToLibrary("Animal Farm", "George Orwell", "128", false);
 displayBooks();
 
 const add_btn = document.querySelector(".add-book-button");
 const form = document.querySelector("#myForm");
-const card_remove_btn = document.querySelector(".card button");
+const card_remove_btn = [...document.querySelectorAll(".card button")];
+const read_status_btn = document.querySelector(".read-status");
 
 add_btn.addEventListener("click", () => {
     showForm();
@@ -80,13 +89,37 @@ form.addEventListener("submit", (e) => {
     let title = document.querySelector("#title").value;
     let author = document.querySelector("#author").value;
     let pages = document.querySelector("#pages").value;
-    let read = document.querySelector("#read").value;
+    let read = document.querySelector("#read").checked;
 
     addBookToLibrary(title, author, pages, read);
     displayBooks();
     closeForm();
 });
 
-card_remove_btn.addEventListener("click", () => {
-    removeBook(card_remove_btn);
+document.addEventListener("click", function (e) {
+    const card_remove_btn = e.target.closest(".card button");
+    const read_status_btn = e.target.closest(".read-status");
+    if (card_remove_btn) {
+        removeBook(card_remove_btn);
+    } else if (read_status_btn) {
+        console.log("Change read status");
+    }
 });
+
+// card_remove_btn.forEach(function (item) {
+//     item.addEventListener("click", function () {
+//         removeBook(item);
+//     });
+// });
+
+// card_remove_btn.addEventListener("click", () => {
+//     removeBook(card_remove_btn);
+// });
+
+// read_status_btn.addEventListener("click", () => {
+//     if (read_status_btn.innerHTML == "Read") {
+//         read_status_btn.innerHTML = "Not Read";
+//     } else if (read_status_btn.innerHTML == "Not read") {
+//         read_status_btn.innerHTML = "Read";
+//     }
+// });

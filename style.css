@@ -102,6 +102,19 @@ button {
     margin: 0px;
 }
 
+.card .read-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 35%;
+    height: 15%;
+    margin: 10px 0px 15px 15px;
+    border-radius: 15px;
+    background-color: hsl(177.14deg 46.01% 57.7%);
+    color: hsl(148.38deg 49.3% 27.84%);
+}
+
 .add-book-button {
     padding: 7px 12px 7px 12px;
     border-radius: 20px;
